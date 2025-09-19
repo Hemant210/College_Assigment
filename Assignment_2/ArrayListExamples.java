@@ -15,7 +15,11 @@ public class ArrayListExamples {
 
     // 2. Iterate through all elements
     public static void q2_iterateElements() {
-        ArrayList<String> list = new ArrayList<>(Arrays.asList("Apple", "Banana", "Cherry"));
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Red");
+        list.add("Green");
+        list.add("Blue");
+        list.add("Yellow");
         for (String item : list) {
             System.out.println(item);
         }
