@@ -4,7 +4,6 @@ import java.util.*;
 
 public class TreeSetExercises {
 
-    // 1. Create and add
     public static TreeSet<String> createTreeSet() {
         TreeSet<String> set = new TreeSet<>();
         set.add("Red");
