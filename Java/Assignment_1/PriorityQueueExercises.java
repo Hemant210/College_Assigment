@@ -1,4 +1,4 @@
-package Assignment_2;
+package Java.Assignment_1;
 
 import java.util.PriorityQueue;
 import java.util.Iterator;

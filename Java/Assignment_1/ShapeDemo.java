@@ -1,4 +1,4 @@
-package Assignment_1;
+package Java.Assignment_1;
 
 // Superclass / Abstract Class
 abstract class Shape {

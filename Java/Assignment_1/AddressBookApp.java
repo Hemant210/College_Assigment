@@ -1,4 +1,4 @@
-package Assignment_1;
+package Java.Assignment_1;
 // AddressBookApp.java
 import javax.swing.*;
 import java.awt.*;
