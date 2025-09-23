@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Slider</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #slider img { width: 300px; height: 200px; display: none; }
+  </style>
+</head>
+<body>
+  <div id="slider">
+    <img src="https://via.placeholder.com/300x200?text=1" style="display:block;">
+    <img src="https://via.placeholder.com/300x200?text=2">
+    <img src="https://via.placeholder.com/300x200?text=3">
+  </div>
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+
+  <script>
+    $(document).ready(function(){
+      var current = 0;
+      var images = $("#slider img");
+
+      function showImage(index){
+        images.hide();
+        images.eq(index).show();
+      }
+
+      $("#next").click(function(){
+        current = (current + 1) % images.length;
+        showImage(current);
+      });
+
+      $("#prev").click(function(){
+        current = (current - 1 + images.length) % images.length;
+        showImage(current);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <form id="myForm">
+    Name: <input type="text" id="name"><br><br>
+    Email: <input type="email" id="email"><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    $(document).ready(function(){
+      $("#myForm").submit(function(e){
+        e.preventDefault(); // Prevent actual form submission
+        var name = $("#name").val();
+        var email = $("#email").val();
+
+        if(name === "" || email === ""){
+          alert("Please fill all fields.");
+        } else {
+          alert("Name: " + name + "\nEmail: " + email);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

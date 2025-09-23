@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>States & Cities</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <select id="state">
+    <option value="">Select State</option>
+    <option value="MH">Maharashtra</option>
+    <option value="KA">Karnataka</option>
+  </select>
+
+  <select id="city">
+    <option value="">Select City</option>
+  </select>
+
+  <script>
+    $(document).ready(function(){
+      var cities = {
+        "MH": ["Mumbai", "Pune", "Nagpur"],
+        "KA": ["Bangalore", "Mysore", "Mangalore"]
+      };
+
+      $("#state").change(function(){
+        var state = $(this).val();
+        $("#city").empty().append('<option value="">Select City</option>');
+        if(state){
+          $.each(cities[state], function(i, city){
+            $("#city").append('<option value="'+city+'">'+city+'</option>');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

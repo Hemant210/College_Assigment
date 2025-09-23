@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  City: <input type="text" id="city">
+  <button id="getWeather">Get Weather</button>
+  <div id="weather"></div>
+
+  <script>
+    const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // replace with your API key
+
+    function fetchWeather(city){
+      $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`,
+        method: "GET",
+        success: function(data){
+          $("#weather").html(`
+            <p>Temperature: ${data.main.temp} °C</p>
+            <p>Condition: ${data.weather[0].description}</p>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png">
+          `);
+        },
+        error: function(){ $("#weather").text("City not found!"); }
+      });
+    }
+
+    $("#getWeather").click(function(){
+      var city = $("#city").val();
+      if(city) fetchWeather(city);
+    });
+  </script>
+</body>
+</html>

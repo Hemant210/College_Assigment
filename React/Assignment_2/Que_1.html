@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Quiz Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .option {
+      display: block;
+      margin: 10px 0;
+      padding: 12px;
+      background: #f9f9f9;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .option:hover {
+      background: #ecf0f1;
+    }
+    .option.correct {
+      border-color: green;
+      background: #eafbe7;
+    }
+    .option.wrong {
+      border-color: red;
+      background: #fdeaea;
+    }
+    #submitBtn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #submitBtn:hover {
+      background: #1f6390;
+    }
+    #score {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    #endMessage {
+      margin-top: 25px;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      background: #dff9fb;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dynamic Quiz Application</h1>
+    <div id="quizBox">
+      <div id="question">Question text</div>
+      <div id="options"></div>
+      <button id="submitBtn">Submit Answer</button>
+      <div id="score">Score: 0</div>
+    </div>
+    <div id="endMessage"></div>
+  </div>
+
+  <script>
+    // Quiz data
+    const quizData = [
+      {
+        question: "Which language is used for styling web pages?",
+        options: ["HTML", "CSS", "JavaScript", "Python"],
+        answer: "CSS"
+      },
+      {
+        question: "Which tag is used to insert an image in HTML?",
+        options: ["<img>", "<image>", "<src>", "<pic>"],
+        answer: "<img>"
+      },
+      {
+        question: "Which company developed JavaScript?",
+        options: ["Microsoft", "Netscape", "Google", "Oracle"],
+        answer: "Netscape"
+      },
+      {
+        question: "Which symbol is used for comments in JavaScript?",
+        options: ["//", "#", "/* */", "<!-- -->"],
+        answer: "//"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedOption = null;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const submitBtn = document.getElementById("submitBtn");
+    const scoreEl = document.getElementById("score");
+    const endMessageEl = document.getElementById("endMessage");
+
+    // Load question
+    function loadQuestion() {
+      questionEl.textContent = quizData[currentQuestion].question;
+      optionsEl.innerHTML = "";
+      quizData[currentQuestion].options.forEach(option => {
+        const div = document.createElement("div");
+        div.textContent = option;
+        div.classList.add("option");
+        div.onclick = () => selectOption(div);
+        optionsEl.appendChild(div);
+      });
+      selectedOption = null;
+    }
+
+    // Select option
+    function selectOption(div) {
+      document.querySelectorAll(".option").forEach(opt => {
+        opt.style.borderColor = "#ccc";
+        opt.classList.remove("correct", "wrong");
+      });
+      div.style.borderColor = "#2980b9";
+      selectedOption = div;
+    }
+
+    // Submit answer
+    submitBtn.onclick = () => {
+      if (!selectedOption) {
+        alert("Please select an option!");
+        return;
+      }
+
+      let answer = quizData[currentQuestion].answer;
+      if (selectedOption.textContent === answer) {
+        selectedOption.classList.add("correct");
+        score++;
+      } else {
+        selectedOption.classList.add("wrong");
+        document.querySelectorAll(".option").forEach(opt => {
+          if (opt.textContent === answer) opt.classList.add("correct");
+        });
+      }
+
+      scoreEl.textContent = "Score: " + score;
+
+      // Move to next question
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+        } else {
+          endQuiz();
+        }
+      }, 1000);
+    };
+
+    // End quiz
+    function endQuiz() {
+      document.getElementById("quizBox").style.display = "none";
+      endMessageEl.style.display = "block";
+      endMessageEl.textContent = `Quiz Over! 🎉 Your Final Score: ${score} / ${quizData.length}`;
+    }
+
+    // Start quiz
+    loadQuestion();
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Load More</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <ul id="list"></ul>
+  <button id="loadMore">Load More</button>
+
+  <script>
+    var page = 1;
+    $("#loadMore").click(function(){
+      $.ajax({
+        url: "https://jsonplaceholder.typicode.com/posts?_limit=5&_page=" + page,
+        method: "GET",
+        success: function(data){
+          data.forEach(post => {
+            $("#list").append("<li>" + post.title + "</li>");
+          });
+          page++;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

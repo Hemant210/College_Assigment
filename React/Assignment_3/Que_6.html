@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX JSON</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="loadBooks">Load Books</button>
+  <ul id="booksList"></ul>
+
+  <script>
+    $(document).ready(function(){
+      $("#loadBooks").click(function(){
+        $.ajax({
+          url: "https://api.sampleapis.com/books/fantasy", // public JSON API
+          method: "GET",
+          success: function(data){
+            $("#booksList").empty();
+            data.slice(0,5).forEach(book => { // show first 5
+              $("#booksList").append("<li>" + book.title + " by " + book.author + "</li>");
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

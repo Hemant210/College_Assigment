@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Tasks Website</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    section { margin-bottom: 30px; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; }
+    button { padding: 8px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 5px; background: #3498db; color: white; }
+    input { padding: 6px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    img { width: 200px; height: 120px; border-radius: 5px; }
+    #stopwatch { font-size: 20px; font-weight: bold; }
+    #galleryModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; }
+    #galleryModal img { max-width:80%; border:5px solid white; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+  <h1>💻 JavaScript Practice Website</h1>
+
+  <!-- Q1 Random Number -->
+  <section>
+    <h2>Q1: Random Number</h2>
+    <button onclick="alert(Math.floor(Math.random()*100)+1)">Generate Random Number</button>
+  </section>
+
+  <!-- Q2 Email Validation -->
+  <section>
+    <h2>Q2: Email Validation</h2>
+    <input type="text" id="email" placeholder="Enter email">
+    <button onclick="validateEmail()">Check</button>
+  </section>
+
+  <!-- Q3 Slideshow -->
+  <section>
+    <h2>Q3: Image Slideshow</h2>
+    <img id="slide" src="https://picsum.photos/id/1015/200/120">
+    <br>
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+  </section>
+
+  <!-- Q4 Small Calculator -->
+  <section>
+    <h2>Q4: Small Calculator</h2>
+    <input type="number" id="calcNum" placeholder="Enter number">
+    <button onclick="square()">Square</button>
+    <button onclick="sqrt()">Square Root</button>
+    <button onclick="factorial()">Factorial</button>
+  </section>
+
+  <!-- Q5 Background Color -->
+  <section>
+    <h2>Q5: Background Color</h2>
+    <select onchange="document.body.style.background=this.value">
+      <option value="">Select</option>
+      <option value="red">Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </section>
+
+  <!-- Q6 Stopwatch -->
+  <section>
+    <h2>Q6: Stopwatch</h2>
+    <div id="stopwatch">00:00:00</div>
+    <button onclick="startWatch()">Start</button>
+    <button onclick="stopWatch()">Stop</button>
+    <button onclick="resetWatch()">Reset</button>
+  </section>
+
+  <!-- Q7 Image Gallery -->
+  <section>
+    <h2>Q7: Image Gallery</h2>
+    <img src="https://picsum.photos/id/1025/200/120" onclick="openGallery(this)">
+    <img src="https://picsum.photos/id/1035/200/120" onclick="openGallery(this)">
+    <img src="https://picsum.photos/id/1045/200/120" onclick="openGallery(this)">
+  </section>
+  <div id="galleryModal" onclick="this.style.display='none'">
+    <img id="modalImg">
+  </div>
+
+  <!-- Q8 Calculator with Two Inputs -->
+  <section>
+    <h2>Q8: Calculator (Two Numbers)</h2>
+    <input type="number" id="num1" placeholder="First">
+    <input type="number" id="num2" placeholder="Second">
+    <button onclick="calc('+')">Add</button>
+    <button onclick="calc('-')">Subtract</button>
+    <button onclick="calc('*')">Multiply</button>
+    <button onclick="calc('/')">Divide</button>
+  </section>
+
+  <!-- Q9 Countdown -->
+  <section>
+    <h2>Q9: Countdown</h2>
+    <div id="countdown">10</div>
+    <button onclick="startCountdown()">Start Countdown</button>
+  </section>
+
+  <!-- Q10 Login Form -->
+  <section>
+    <h2>Q10: Login Form</h2>
+    <input type="text" id="user" placeholder="Username">
+    <input type="password" id="pass" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </section>
+
+  <script>
+    // Q2 Email validation
+    function validateEmail(){
+      let email=document.getElementById("email").value;
+      if(email.includes("@")) alert("Email address is valid");
+      else alert("Invalid email address");
+    }
+
+    // Q3 Slideshow
+    const slides=["https://picsum.photos/id/1015/200/120","https://picsum.photos/id/1020/200/120","https://picsum.photos/id/1030/200/120"];
+    let index=0;
+    function showSlide(){ document.getElementById("slide").src=slides[index]; }
+    function nextSlide(){ index=(index+1)%slides.length; showSlide(); }
+    function prevSlide(){ index=(index-1+slides.length)%slides.length; showSlide(); }
+
+    // Q4 Calculator
+    function square(){ let n=+document.getElementById("calcNum").value; alert(n*n); }
+    function sqrt(){ let n=+document.getElementById("calcNum").value; alert(Math.sqrt(n)); }
+    function factorial(){ let n=+document.getElementById("calcNum").value; let f=1; for(let i=1;i<=n;i++) f*=i; alert(f); }
+
+    // Q6 Stopwatch
+    let timer=null, sec=0;
+    function startWatch(){ if(timer) return; timer=setInterval(()=>{ sec++; document.getElementById("stopwatch").textContent=new Date(sec*1000).toISOString().substr(11,8); },1000);}
+    function stopWatch(){ clearInterval(timer); timer=null;}
+    function resetWatch(){ stopWatch(); sec=0; document.getElementById("stopwatch").textContent="00:00:00"; }
+
+    // Q7 Gallery
+    function openGallery(img){ document.getElementById("modalImg").src=img.src; document.getElementById("galleryModal").style.display="flex"; }
+
+    // Q8 Calculator 2 nums
+    function calc(op){ let a=+document.getElementById("num1").value; let b=+document.getElementById("num2").value; let res; if(op==='+') res=a+b; if(op==='-') res=a-b; if(op==='*') res=a*b; if(op==='/') res=a/b; alert("Result: "+res); }
+
+    // Q9 Countdown
+    function startCountdown(){ let c=10; let cd=document.getElementById("countdown"); let x=setInterval(()=>{ cd.textContent=c; if(c===0){ clearInterval(x); alert("Time's up!"); } c--; },1000); }
+
+    // Q10 Login
+    function login(){ let u=document.getElementById("user").value; let p=document.getElementById("pass").value; if(u==="admin" && p==="password") alert("Login Successful"); else alert("Login Failed"); }
+  </script>
+</body>
+</html>

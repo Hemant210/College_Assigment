@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Toggle Div</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="toggleBtn">Show/Hide Div</button>
+  <div id="myDiv" style="display:none; margin-top:10px; padding:10px; background:#f0f0f0;">
+    Hello! I am a toggle div.
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#toggleBtn").click(function(){
+        $("#myDiv").toggle(); // toggles visibility
+      });
+    });
+  </script>
+</body>
+</html>

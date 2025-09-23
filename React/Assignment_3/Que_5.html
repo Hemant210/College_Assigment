@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validation</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <form id="form">
+    Name: <input type="text" id="name"><span id="error" style="color:red"></span><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    $(document).ready(function(){
+      $("#form").submit(function(e){
+        e.preventDefault();
+        if($("#name").val() === ""){
+          $("#error").text(" Please enter your name.");
+        } else {
+          $("#error").text("");
+          alert("Form submitted!");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
