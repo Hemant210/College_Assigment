@@ -6,31 +6,42 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  City: <input type="text" id="city">
+  <h1>Weather App</h1>
+  <label for="city">Enter city name:</label>
+  <input type="text" id="city" placeholder="e.g., Surat">
   <button id="getWeather">Get Weather</button>
   <div id="weather"></div>
 
   <script>
-    const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // replace with your API key
+    const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
 
-    function fetchWeather(city){
+    function fetchWeather(city) {
       $.ajax({
         url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`,
-        method: "GET",
-        success: function(data){
-          $("#weather").html(`
-            <p>Temperature: ${data.main.temp} °C</p>
-            <p>Condition: ${data.weather[0].description}</p>
-            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png">
-          `);
+        method: 'GET',
+        success: function(data) {
+          const weatherInfo = `
+            <p><strong>${data.name}, ${data.sys.country}</strong></p>
+            <p>Temperature: ${data.main.temp}°C</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+            <p>Weather: ${data.weather[0].description}</p>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather icon">
+          `;
+          $('#weather').html(weatherInfo);
         },
-        error: function(){ $("#weather").text("City not found!"); }
+        error: function() {
+          $('#weather').text('City not found!');
+        }
       });
     }
 
-    $("#getWeather").click(function(){
-      var city = $("#city").val();
-      if(city) fetchWeather(city);
+    $('#getWeather').click(function() {
+      const city = $('#city').val();
+      if (city) {
+        fetchWeather(city);
+      } else {
+        $('#weather').text('Please enter a city name.');
+      }
     });
   </script>
 </body>
