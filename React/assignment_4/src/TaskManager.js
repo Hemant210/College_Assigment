@@ -1,7 +1,7 @@
 // TaskManager.js
 import React, { Component } from "react";
-import TaskForm from "./TaskForm";   // ✅ Corrected path
-import TaskList from "./TaskList";   // ✅ Corrected path
+import TaskForm from "./TaskForm"; // ✅ Corrected path
+import TaskList from "./TaskList"; // ✅ Corrected path
 import "./index.css"; // optional styling
 
 class TaskManager extends Component {
@@ -17,32 +17,25 @@ class TaskManager extends Component {
     };
   }
 
-  // Step 2: Add a new task
-  addTask = (newTaskTitle) => {
-    const newTask = {
-      id: Date.now(),
-      title: newTaskTitle,
-      completed: false,
-    };
+  // Add a new task
+  addTask = (title) =>
+    this.setState((prevState) => ({
+      tasks: [...prevState.tasks, { id: Date.now(), title, completed: false }],
+    }));
 
-    this.setState({
-      tasks: [...this.state.tasks, newTask],
-    });
-  };
+  // Toggle task completion
+  toggleTask = (id) =>
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      ),
+    }));
 
-  // Step 3: Toggle task completion
-  toggleTask = (id) => {
-    const updatedTasks = this.state.tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-    this.setState({ tasks: updatedTasks });
-  };
-
-  // Step 4: Delete a task
-  deleteTask = (id) => {
-    const filteredTasks = this.state.tasks.filter((task) => task.id !== id);
-    this.setState({ tasks: filteredTasks });
-  };
+  // Delete a task
+  deleteTask = (id) =>
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.filter((t) => t.id !== id),
+    }));
 
   render() {
     return (
