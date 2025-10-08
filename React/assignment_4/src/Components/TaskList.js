@@ -1,7 +1,6 @@
 // TaskList.js
 import React from "react";
-import TaskItem from "../TaskItem";
-
+import TaskItem from "../Components/TaskItem";
 function TaskList({ tasks, toggleTask, deleteTask }) {
   if (tasks.length === 0) {
     return <p className="no-tasks">No tasks to display.</p>;

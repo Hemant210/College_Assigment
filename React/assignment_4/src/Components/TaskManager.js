@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import TaskForm from "./TaskForm"; // ✅ Corrected path
 import TaskList from "./TaskList"; // ✅ Corrected path
-import "./index.css"; // optional styling
+import "../index.css"; // optional styling
 
 class TaskManager extends Component {
   constructor(props) {
