@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import TaskManager from "./TaskManager";
+import TaskManager from "./Components/TaskManager";
 
 function App() {
   return (
