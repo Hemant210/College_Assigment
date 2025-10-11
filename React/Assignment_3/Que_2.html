@@ -24,13 +24,13 @@
       };
 
       $("#state").change(function(){
-        var state = $(this).val();
-        $("#city").empty().append('<option value="">Select City</option>');
-        if(state){
-          $.each(cities[state], function(i, city){
-            $("#city").append('<option value="'+city+'">'+city+'</option>');
-          });
-        }
+        var state = $this.val();
+        $("#city").empty().append();
+      if(state){
+        $.each(cities[state], function(i, city){
+          $('city').append(<Option value= " '+city+'"> + city + </Option>);
+        });
+      }
       });
     });
   </script>
