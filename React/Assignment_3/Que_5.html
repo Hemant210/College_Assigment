@@ -21,7 +21,6 @@
   <script>
     $(document).ready(function() {
       $("#myForm").submit(function(e) {
-        e.preventDefault(); // prevent form submission
 
         var name = $("#name").val().trim(); // get input value and remove spaces
         if (name === "") {
@@ -29,6 +28,8 @@
         } else {
           $("#error").text(""); // clear error
           alert("Form submitted successfully! Name: " + name);
+
+           e.preventDefault(); // prevent form submission
         }
       });
     });
