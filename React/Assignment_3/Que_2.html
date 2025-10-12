@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,15 +24,62 @@
       };
 
       $("#state").change(function(){
-        var state = $this.val();
-        $("#city").empty().append();
-      if(state){
-        $.each(cities[state], function(i, city){
-          $('city').append(<Option value= " '+city+'"> + city + </Option>);
-        });
-      }
+        var state = $(this).val();
+        $("#city").empty().append('<option value="">Select City</option>');
+        if(state){
+          $.each(cities[state], function(i, city){
+            $('#city').append('<option value="' + city + '">' + city + '</option>');
+          });
+        }
       });
     });
   </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change state</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <select id="state">
+    <option value=""> --Select state-- </option>
+      <option value="MH">Maharashtra</option>
+    <option value="GJ">Gujarat</option>
+  </select>
+
+<select id="city">
+  <option value=""> --Select City</soption>
+</select>  
+
+<script>
+$(function() {   // short form of $(document).ready()
+  
+  let cities = {
+    MH: ["Mumbai", "Pune", "Nagpur"],
+    GJ: ["Surat", "Ahmedabad", "Vadodara"]
+  };
+
+  $("#state").change(function() {
+    let state = $(this).val();
+    let cityDropdown = $("#city");
+
+    // Clear and add default option
+    cityDropdown.html('<option value="">--Select City--</option>');
+
+    // Add cities if state selected
+    if (state) {
+      for (let city of cities[state]) {
+        cityDropdown.append(`<option value="${city}">${city}</option>`);
+      }
+    }
+  });
+
+});
+</script>
+
 </body>
 </html>
