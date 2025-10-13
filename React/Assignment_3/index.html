@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login Form</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f2f2f2;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px gray;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+    .red-border {
+      border-color: red !important;
+    }
+    .green-border {
+      border-color: green !important;
+    }
+    button {
+      width: 100%;
+      padding: 8px;
+      background: blue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="loginForm">
+    <h3>Login</h3>
+
+    <label>Email:</label>
+    <input type="text" id="email">
+    <div id="emailError" class="error"></div>
+
+    <label>Password:</label>
+    <input type="password" id="password">
+    <div id="passwordError" class="error"></div>
+
+    <button type="submit">Login</button>
+    <p id="result"></p>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      // Input elements
+      let email = document.getElementById("email");
+      let password = document.getElementById("password");
+      let emailError = document.getElementById("emailError");
+      let passwordError = document.getElementById("passwordError");
+      let result = document.getElementById("result");
+
+      // Clear old messages & border colors
+      emailError.textContent = "";
+      passwordError.textContent = "";
+      result.textContent = "";
+      email.classList.remove("red-border", "green-border");
+      password.classList.remove("red-border", "green-border");
+
+      let valid = true;
+
+      // Regex patterns
+      let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-z]+\.[a-z]{2,}$/;
+      let passRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+      // Email validation
+      if(!emailRegex.test(email.value)){
+        emailError.textContent = "Invalid email format!";
+        email.classList.add("red-border");
+        valid = false;
+      } else {
+        email.classList.add("green-border");
+      }
+
+      // Password validation
+      if(!passRegex.test(password.value)){
+        passwordError.textContent = "Password must have A-Z, a-z, 0-9, special char";
+        password.classList.add("red-border");
+        valid = false;
+      } else {
+        password.classList.add("green-border");
+      }
+
+      // Simulated login
+      if(valid){
+        setTimeout(() => {
+          if(email.value === "student@example.com" && password.value === "Test@123"){
+            sessionStorage.setItem("userEmail", email.value);
+            result.style.color = "green";
+            result.textContent = "✅ Welcome " + sessionStorage.getItem("userEmail");
+          } else {
+            password.classList.add("red-border");
+            result.style.color = "red";
+            result.textContent = "❌ Invalid credentials";
+          }
+        }, 500);
+      }
+    });
+  </script>
+
+</body>
+</html>
