@@ -5,31 +5,45 @@
   <title>Client-Side Validation</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    .error {
-      color: red;
-      margin-left: 10px;
-    }
+    .error { color: red; margin-left: 10px; }
   </style>
 </head>
 <body>
   <form id="myForm">
     Name: <input type="text" id="name">
-    <span id="error" class="error"></span><br><br>
+    <span id="nameError" class="error"></span><br><br>
+
+    Lastname: <input type="text" id="lastname">
+    <span id="lastnameError" class="error"></span><br><br>
+
     <button type="submit">Submit</button>
   </form>
 
   <script>
-    $(document).ready(function() {
+    $(function() {
       $("#myForm").submit(function(e) {
+        e.preventDefault(); // always prevent default first
 
-        var name = $("#name").val().trim(); // get input value and remove spaces
+        var name = $("#name").val().trim();
+        var lastname = $("#lastname").val().trim();
+        var valid = true;
+
         if (name === "") {
-          $("#error").text("Please enter your name."); // show error
+          $("#nameError").text("Please enter your name.");
+          valid = false;
         } else {
-          $("#error").text(""); // clear error
-          alert("Form submitted successfully! Name: " + name);
+          $("#nameError").text("");
+        }
 
-           e.preventDefault(); // prevent form submission
+        if (lastname === "") {
+          $("#lastnameError").text("Please enter your last name.");
+          valid = false;
+        } else {
+          $("#lastnameError").text("");
+        }
+
+        if (valid) {
+          alert("Form submitted successfully! Name: " + name + " " + lastname);
         }
       });
     });

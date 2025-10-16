@@ -56,28 +56,24 @@
 </select>  
 
 <script>
-$(function() {   // short form of $(document).ready()
-  
+
+$(function(){
   let cities = {
-    MH: ["Mumbai", "Pune", "Nagpur"],
-    GJ: ["Surat", "Ahmedabad", "Vadodara"]
+    MH: ["Mumbai", "Pune", "Dhule"],
+    GJ: ["Surat", "Anand", "Vapi"]
   };
 
-  $("#state").change(function() {
+  $("#state").change(function(){
     let state = $(this).val();
-    let cityDropdown = $("#city");
 
-    // Clear and add default option
-    cityDropdown.html('<option value="">--Select City--</option>');
+    $("#city").html('<option value= ""> --Select City--</option>');
 
-    // Add cities if state selected
-    if (state) {
-      for (let city of cities[state]) {
-        cityDropdown.append(`<option value="${city}">${city}</option>`);
+    if(state){
+      for(let city of cities[state]){
+        $("#city").append(`<option value="${city}">${city}</option>`);
       }
     }
   });
-
 });
 </script>
 

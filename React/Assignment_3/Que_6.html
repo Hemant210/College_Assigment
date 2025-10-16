@@ -10,10 +10,10 @@
   <ul id="booksList"></ul>
 
   <script>
-    $(document).ready(function(){
+    $(function(){
       $("#loadBooks").click(function(){
         $.ajax({
-          url: "https://api.sampleapis.com/books/fantasy", // public JSON API
+          url: "https://api.sampleapis.com/books", // public JSON API
           method: "GET",
           success: function(data){
             $("#booksList").empty();

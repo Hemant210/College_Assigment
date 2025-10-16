@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <form id="myForm">
+  <form id="myform">
     <label>Name:</label>
     <input type="text" id="name"><br><br>
 
@@ -18,14 +18,14 @@
 
   <script>
     $(function(){
-      $("#myForm").on("submit", function(e){
+      $('#myform').on("submit", function(e){
         e.preventDefault();
-        
+
         let name = $("#name").val().trim();
         let email = $("#email").val().trim();
 
         if(!name || !email){
-          alert("Please fill all fields.");
+          alert("Please data dedo");
         } else {
           alert(`Name: ${name}\nEmail: ${email}`);
         }
