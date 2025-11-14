@@ -17,6 +17,7 @@ class TaskManager extends Component {
     };
   }
 
+  
   // Add a new task
   addTask = (title) =>
     this.setState((prevState) => ({
