@@ -10,7 +10,7 @@ function TaskForm({ addTask }) {
     if (taskInput.trim() === "") return;
 
     addTask(taskInput);
-    setTaskInput(""); // Clear input after adding
+    setTaskInput(""); 
   };
 
   return (
