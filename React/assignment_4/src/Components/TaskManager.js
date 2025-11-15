@@ -1,7 +1,7 @@
 // TaskManager.js
 import React, { Component } from "react";
-import TaskForm from "./TaskForm"; // ✅ Corrected path
-import TaskList from "./TaskList"; // ✅ Corrected path
+import TaskForm from "./TaskForm";
+import TaskList from "./TaskList"; 
 import "../index.css"; // optional styling
 
 class TaskManager extends Component {
