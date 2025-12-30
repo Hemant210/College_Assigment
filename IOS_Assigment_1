@@ -1,0 +1,154 @@
+//Assigment 1 IOS
+import Foundation
+
+//Q-1. Check if marks are greater than or equal to 40 (Pass/Fail)
+let mark = 39
+
+if(mark >= 40){
+  print("Pass")
+} else {
+  print("Fail")
+}
+
+//Q-2. Check if number is Even or Odd
+let number = 40
+
+if(number % 2 == 0){
+  print("Number is Even")
+} else {
+  print("Number is ODD")
+}
+
+//Q-3. Print Grade based on Marks
+let marks = 78
+
+if marks >= 90 && marks <= 100 {
+    print("Grade A")
+} else if marks >= 75 && marks <= 89 {
+    print("Grade B")
+} else if marks >= 60 && marks <= 74 {
+    print("Grade C")
+} else {
+    print("Fail")
+}
+
+//Q-4. Use Switch Case to Print Day Name
+let day = 3
+
+switch day {
+case 1:
+    print("Monday")
+case 2:
+    print("Tuesday")
+case 3:
+    print("Wednesday")
+case 4:
+    print("Thursday")
+case 5:
+    print("Friday")
+case 6:
+    print("Saturday")
+case 7:
+    print("Sunday")
+default:
+    print("Invalid Day")
+}
+
+
+//Q-5. Find Factorial of a Number
+let n = 5
+var fact = 1
+
+for i in 1...n {
+    fact = fact * i
+}
+
+print("Factorial is", fact)
+
+//Q-6. Print Prime Numbers till N
+let m = 20
+
+for num in 2...m {
+    var isPrime = true
+
+    for i in 2..<num {
+        if num % i == 0 {
+            isPrime = false
+            break
+        }
+    }
+
+    if isPrime {
+        print(num)
+    }
+}
+
+//Q-7. Check if String is Palindrome
+let text = "madam"
+let reversedText = String(text.reversed())
+
+if text == reversedText {
+    print("Palindrome")
+} else {
+    print("Not Palindrome")
+}
+
+//Q-8. Write a program to print below Patters:
+//Pattern 1:
+for _ in 1...4 {
+    for _ in 1...5 {
+        print("*", terminator: "")
+    }
+    print("")
+}
+
+
+//Pattern 2:
+var stars = 1
+
+for _ in 1...3 {
+    for _ in 1...stars {
+        print("*", terminator: "")
+    }
+    print("")
+    stars = stars + 2
+}
+
+
+//Pattern 3:
+var num = 10
+
+for i in 1...4 {
+    var value = num
+    for _ in 1...i {
+        print(value, terminator: "")
+        value = value - 1
+    }
+    print("")
+    num = num - 2
+}
+
+//Pattern 4:
+let size = 5
+
+for i in 0..<size {
+    var line = ""
+    for j in 0..<size {
+        if j == i || j == (size - 1 - i) {
+            line += "*"
+        } else {
+            line += " "
+        }
+    }
+    print(line)
+}
+
+//Pattern 5:
+let letters = ["A", "B", "C", "D"]
+
+for i in 0..<letters.count {
+    for _ in 0...i {
+        print(letters[i], terminator: "")
+    }
+    print("")
+}
