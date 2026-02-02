@@ -1,0 +1,255 @@
+//Assigment-2 IOS 
+import UIKit
+
+//1. Declare and initialize an integer array with at least five elements in it and print the number of index available in array.
+var numbers : [Int] = [10,29,20,30,40]
+
+print("Q1 Output :- ")
+print("Number of index :- ", numbers.count)
+print("----------")
+
+
+//2. Check whether the array is empty or not.
+var numbers2 : [Int] = []
+
+print("Q2 Output :- ")
+if(numbers2.count == 0){
+    print("Array is empty")
+} else {
+    print("Not Empty")
+}
+
+print("----------")
+
+//3. Add a new element at the end of the array.
+numbers.append(50)
+
+print("Q3 Output :- ")
+print(numbers)
+print("----------")
+
+//4. Add multiple elements to the array at once.
+numbers.append(contentsOf: [60,70,80])
+
+print("Q4 Output :- ")
+print(numbers)
+print("----------")
+
+//5. Insert an element at a specific index.
+print("Q5 Output :- ")
+numbers.insert(39, at: 4)
+print(numbers)
+print("----------")
+
+//6. Remove an element from a specific index.
+print("Q6 Output :- ")
+numbers.remove(at: 6)
+print(numbers)
+print("----------")
+
+// Q7. Check whether a given element exists in the array
+print("Q7 Output :- ")
+
+let element = 100
+if numbers.contains(element) {
+    print("Array contains it")
+} else {
+    print("Array does not contain")
+}
+
+print("----------")
+
+//8. Display the first and last elements of the array.
+print("Q8 Output :- ")
+    print("Arrays first element is :- ", numbers[0])
+print("Arrays Last element is :- ", numbers[numbers.count - 1])
+
+print("----------")
+
+//9. Sort the array in descending order.
+print("Q.9 Output :- ")
+
+var des = numbers
+des.sort(by: >)
+print("Array in descending order:", des)
+print("----------")
+
+//10. Reverse the array.
+print("Q8 Output :- ")
+
+var reverarr = numbers
+reverarr.reverse()
+print("Reverse the array :- ", reverarr)
+print("----------")
+
+//11. Create a new array by doubling each element.
+print("Q.11 Output :- ")
+
+var arr : [Int] = []
+for num in numbers {
+    arr.append(num * 2)
+}
+
+print("Doubling array :- ", arr)
+print("----------")
+
+//12. Create a new array containing elements greater than a given value.
+print("Q.12 Output :- ")
+let v = 40
+
+var arr1 : [Int] = []
+for num in numbers {
+    if num > v {
+        arr1.append(num)
+    }
+}
+
+print("Doubling array :- ", arr1)
+
+
+print("----------")
+
+//13. Calculate the sum of all elements.
+print("Q. 13 Output :- ")
+
+var count = 0
+
+for num in numbers{
+    count += num
+}
+
+print(count)
+print("----------")
+
+//14. Print all elements using an index-based loop.
+print("Q. 14 Output :- ")
+for n in 0..<numbers.count {
+    print("Index \(n) : \(numbers[n])")
+}
+print("----------")
+
+
+//Q-2.Create a class BankAccount with deposit and withdraw methods and display balance.
+print("Q-2 BankAccount Tranction output :- ")
+
+class BankAccount {
+    var balance : Int = 0
+    
+    func deposit(amount : Int){
+        balance = balance + amount
+        print("Diposit amount :-  \(amount)")
+    }
+    
+    func withdraw(amount : Int){
+        balance = balance - amount
+        print("Diposit amount :-  \(amount)")
+    }
+    
+    func show(){
+        print("Balance : \(balance)")
+    }
+}
+
+
+let account = BankAccount()
+
+account.deposit(amount: 2000);
+account.withdraw(amount: 500)
+account.show()
+print("----------")
+
+
+
+//Q-3.Create a base class Person with properties name and age, and create a subclass Employee that inherits Person and calculate salary based on HRA and DA.
+//(You should use super and self keyword.)
+print("Q-3 Calculate salary :- ")
+
+class Person {
+    var name : String
+    var age : Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+
+class employee : Person {
+    var basicsalary : Int
+    var hra : Int
+    var da : Int
+    
+    init(name : String, age : Int, basicsalary: Int, hra: Int, da: Int) {
+        self.basicsalary = basicsalary
+        self.hra = hra
+        self.da = da
+        super.init(name: name, age: age)
+    }
+    
+    func calculatesalary() -> Int {
+        return basicsalary + hra + da
+    }
+}
+
+
+let emp = employee(name : "Hemant", age : 21, basicsalary: 25000, hra: 4000, da: 2000)
+print("Name :-  \(emp.name)")
+print("Age :- \(emp.age)")
+print("Salary :- \(emp.calculatesalary())")
+
+
+print("----------")
+
+
+//Q-4.Create a real-life example (e.g., Shape → Circle) and override area calculation.
+print("Q-4 Shape → Circle, override area :- ")
+
+class Shape {
+    func area() -> Int{
+        return 0
+    }
+}
+
+
+class Circle : Shape {
+    var radius : Int
+    
+    init(radius: Int) {
+        self.radius = radius
+    }
+    
+    override func area() -> Int {
+        return 3 * radius * radius
+    }
+}
+
+let c = Circle(radius: 5)
+print(c.area())
+print("----------")
+
+//Q-5.Create a structure Book with title, author, and price. And display its details.
+print("Q-5 Structure Book :- ")
+
+class Book {
+    var title : String
+    var author : String
+    var price : Int
+    
+    init(title: String, author: String, price: Int) {
+        self.title = title
+        self.author = author
+        self.price = price
+    }
+    
+    func diplaybook(){
+        print("Title :-  \(title)")
+        print("Author :-  \(author)")
+        print("Price :-  \(price)")
+    }
+    
+}
+
+let book1 = Book(title: "wing of fire", author: "A.P.J. Kalam", price: 200)
+book1.diplaybook()
+
+print("----------")
