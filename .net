@@ -1,0 +1,3 @@
+Create a C# application to demonstrate use of Generic Abstract class.
+2) Create an MVC Core web application to perform CRUD operations for Project allocation to employees using EntityFramework. Also create advance search functionality to search employee on project.
+3) Demonstrate use of String Indexer and multivalued Indexer to search data from a Generic collection.
