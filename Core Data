@@ -10,123 +10,113 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    // MARK: - IBOutlets
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var age: UITextField!
     @IBOutlet weak var number: UITextField!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var btn: UIButton!
-    @IBOutlet weak var i: UITextField! // ID for display
-
-    // MARK: - Core Data Context
+    @IBOutlet weak var i: UITextField!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-    // MARK: - Variables
-    var arrdata: [Person] = []       // Array to store Person objects
-    var selectPerson: Person?        // Selected Person for update
-
-    // MARK: - View Did Load
+    
+    var arrdata: [Person] = []
+    var selectPerson: Person?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()          // Load data from Core Data
-        printDatabasePath()  // Show database path in console
+        fetchdata()
+        printDatabasePath()
     }
 
-    // MARK: - Insert / Update Button
-    @IBAction func insertData(_ sender: UIButton) {
-        // Validate inputs
-        guard let nameText = name.text, !nameText.isEmpty,
-              let ageValue = Int16(age.text ?? ""),
-              let numberValue = Int32(number.text ?? "") else {
-            print("Invalid input")
-            return
-        }
-
+    // ✅ INSERT BUTTON
+    @IBAction func insertdata(_ sender: UIButton) {
         if let person = selectPerson {
-            // ✅ UPDATE existing record
-            person.name = nameText
-            person.age = ageValue
-            person.number = numberValue
+            // UPDATE
+            person.name = name.text
+            person.age = Int16(age.text ?? "") ?? 0
+            person.number = Int32(number.text ?? "") ?? 0
+            
         } else {
-            // ✅ INSERT new record
+            // SAVE
             let newPerson = Person(context: context)
-            newPerson.name = nameText
-            newPerson.age = ageValue
-            newPerson.number = numberValue
+            newPerson.name = name.text
+            newPerson.age = Int16(age.text ?? "") ?? 0
+            newPerson.number = Int32(number.text ?? "") ?? 0
             newPerson.id = UUID()
         }
-
-        // ✅ SAVE to Core Data
+        
+        // ✅ SAVE ONLY ONCE
         try? context.save()
-
-        // ✅ Refresh table and clear text fields
-        fetchData()
-        clearData()
-
-        // ✅ Reset button and selection
+        
+        // ✅ REFRESH + CLEAR
+        fetchdata()
+        cleardata()
+        
+        // ✅ RESET
         selectPerson = nil
         btn.setTitle("Insert", for: .normal)
     }
-
-    // MARK: - Fetch Data
-    func fetchData() {
-        let request: NSFetchRequest<Person> = Person.fetchRequest()
-        arrdata = (try? context.fetch(request)) ?? []
-        tableview.reloadData()
-    }
-
-    // MARK: - Clear Text Fields
-    func clearData() {
+    // ✅ FETCH
+    func fetchdata() {
+          let request: NSFetchRequest<Person> = Person.fetchRequest()
+          do {
+              arrdata = try context.fetch(request)
+          } catch {
+              print("Failed to fetch: \(error)")
+          }
+          tableview.reloadData()
+      }
+    
+    // ✅ CLEAR TEXTFIELDS
+    func cleardata() {
         name.text = ""
         age.text = ""
         number.text = ""
         i.text = ""
     }
 
-    // MARK: - TableView DataSource
+    // ✅ TABLE VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrdata.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let data = arrdata[indexPath.row]
-
+        
         cell.textLabel?.text = data.name
         cell.detailTextLabel?.text = "Age: \(data.age), No: \(data.number)"
-
+        
         return cell
     }
 
-    // MARK: - TableView Delete
+    // ✅ DELETE
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
-
+        
         if editingStyle == .delete {
-            // Delete selected object
             context.delete(arrdata[indexPath.row])
             try? context.save()
-            fetchData()
+            fetchdata()
         }
     }
 
-    // MARK: - TableView Select (for update)
+    // ✅ SELECT (FOR UPDATE)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let data = arrdata[indexPath.row]
         selectPerson = data
-
-        // Fill text fields with selected data
+        
         name.text = data.name
         age.text = "\(data.age)"
         number.text = "\(data.number)"
-        i.text = data.id?.uuidString
-
+        if let id = data.id { i.text = id.uuidString }
+        
         btn.setTitle("Update", for: .normal)
     }
-
-    // MARK: - Print Core Data Database Path
+    
     func printDatabasePath() {
         if let storeURL = (UIApplication.shared.delegate as? AppDelegate)?
             .persistentContainer.persistentStoreCoordinator.persistentStores.first?.url {
