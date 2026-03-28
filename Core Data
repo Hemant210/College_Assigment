@@ -1,0 +1,114 @@
+//
+//  ViewController.swift
+//  PracticeDemo
+//
+//  Created by ICT2Batch1 on 27/03/26.
+//
+
+import UIKit
+import CoreData
+
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var age: UITextField!
+    @IBOutlet weak var number: UITextField!
+    @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var btn: UIButton!
+    @IBOutlet weak var i: UITextField!
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var arrdata: [Person] = []
+    var selectPerson: Person?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchdata()
+    }
+
+    // ✅ INSERT BUTTON
+    @IBAction func insert(_ sender: UIButton) {
+        
+        if let person = selectPerson {
+            // UPDATE
+            person.name = name.text
+            person.age = Int16(age.text ?? "") ?? 0
+            person.number = Int32(number.text ?? "") ?? 0
+            
+        } else {
+            // SAVE
+            let newPerson = Person(context: context)
+            newPerson.name = name.text
+            newPerson.age = Int16(age.text ?? "") ?? 0
+            newPerson.number = Int32(number.text ?? "") ?? 0
+            newPerson.id = UUID()
+        }
+        
+        // ✅ SAVE ONLY ONCE
+        try? context.save()
+        
+        // ✅ REFRESH + CLEAR
+        fetchdata()
+        cleardata()
+        
+        // ✅ RESET
+        selectPerson = nil
+        btn.setTitle("Insert", for: .normal)
+    }
+
+    // ✅ FETCH
+    func fetchdata() {
+        let request: NSFetchRequest<Person> = Person.fetchRequest()
+        arrdata = (try? context.fetch(request)) ?? []
+        tableview.reloadData()
+    }
+
+    // ✅ CLEAR TEXTFIELDS
+    func cleardata() {
+        name.text = ""
+        age.text = ""
+        number.text = ""
+    }
+
+    // ✅ TABLE VIEW
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrdata.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let data = arrdata[indexPath.row]
+        
+        cell.textLabel?.text = data.name
+        cell.detailTextLabel?.text = "Age: \(data.age), No: \(data.number)"
+        
+        return cell
+    }
+
+    // ✅ DELETE
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            context.delete(arrdata[indexPath.row])
+            try? context.save()
+            fetchdata()
+        }
+    }
+
+    // ✅ SELECT (FOR UPDATE)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let data = arrdata[indexPath.row]
+        selectPerson = data
+        
+        name.text = data.name
+        age.text = "\(data.age)"
+        number.text = "\(data.number)"
+        
+        btn.setTitle("Update", for: .normal)
+    }
+}
