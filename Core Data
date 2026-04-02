@@ -123,3 +123,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 }
+
+
+//Navgigation
+
+//DetailViewController.swift
+import UIKit
+
+class DetailViewController: UIViewController {
+
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+
+    var person: Person?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        nameLabel.text = person?.name
+        ageLabel.text = "Age: \(person?.age ?? 0)"
+        numberLabel.text = "No: \(person?.number ?? 0)"
+    }
+}
+
+
+performSegue(withIdentifier: "next", sender: data)
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    if segue.identifier == "next" {
+        let vc = segue.destination as! DetailViewController
+        vc.person = sender as? Person
+    }
+}
