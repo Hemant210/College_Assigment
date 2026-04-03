@@ -156,3 +156,25 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         vc.person = sender as? Person
     }
 }
+
+
+
+func showAlert(message: String) {
+    let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+    
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    
+    self.present(alert, animated: true, completion: nil)
+}
+
+
+@IBAction func insertData(_ sender: UIButton) {
+    
+    // Your insert logic here
+    // Example: saving to CoreData
+    
+    print("Data Inserted")
+    
+    // Show alert
+    showAlert(message: "Record Inserted Successfully!")
+}
