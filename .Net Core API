@@ -57,6 +57,7 @@ namespace Exan_Practice_1.Controllers
             return Ok();
         }
 
+
         // ✅ DELETE
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
