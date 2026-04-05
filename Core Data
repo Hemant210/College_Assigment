@@ -53,6 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         selectPerson = nil
         btn.setTitle("Insert", for: .normal)
     }
+
     // ✅ FETCH
     func fetchdata() {
           let request: NSFetchRequest<Person> = Person.fetchRequest()
