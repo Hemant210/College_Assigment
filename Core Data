@@ -172,8 +172,6 @@ func showAlert(message: String) {
 @IBAction func insertData(_ sender: UIButton) {
     
     // Your insert logic here
-    // Example: saving to CoreData
-    
     print("Data Inserted")
     
     // Show alert
