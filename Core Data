@@ -64,6 +64,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableview.reloadData()
     }
 
+func printDatabasePath() {
+
+    if let storeURL = (UIApplication.shared.delegate as? AppDelegate)?
+        .persistentContainer
+        .persistentStoreCoordinator
+        .persistentStores.first?.url {
+
+        print("Core Data SQLite file path: \(storeURL.path)")
+
+    } else {
+        print("Failed to get database path")
+    }
+}
     // MARK: - CLEAR
     func clearData() {
         name.text = ""
