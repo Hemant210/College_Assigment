@@ -1,0 +1,6 @@
+{
+  "name": "05-extract-zip",
+  "version": "1.0.0",
+  "scripts": {"start": "node app.js"},
+  "dependencies": {"extract-zip": "^2.0.1"}
+}

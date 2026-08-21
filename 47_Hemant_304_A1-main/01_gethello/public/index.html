@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>AJAX Demo</title></head>
+<body>
+  <h2>NodeJS AJAX Example</h2>
+  <button onclick="getHello()">Get Hello</button>
+  <p id="result"></p>
+  <script>
+    async function getHello() {
+      const response = await fetch('/gethello');
+      document.getElementById('result').innerText = await response.text();
+    }
+  </script>
+</body>
+</html>

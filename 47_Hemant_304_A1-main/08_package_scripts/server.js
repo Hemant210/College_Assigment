@@ -1,0 +1,1 @@
+const http = require('http'); http.createServer((q,r)=>r.end('Server Script Running')).listen(3000,()=>console.log('Server on http://localhost:3000'));
