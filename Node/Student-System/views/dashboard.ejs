@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body { font-family: Arial; background:#f2f2f2; display:flex;
+           justify-content:center; padding-top:60px; }
+    .box { background:#fff; padding:30px; width:400px; border-radius:8px;
+           box-shadow:0 0 10px #ccc; text-align:center; }
+    a.btn { display:inline-block; margin-top:15px; padding:10px 20px;
+            background:#dc3545; color:#fff; text-decoration:none; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Welcome, <%= student.name %>!</h2>
+<p>Email: <%= student.email %></p>
+    <a class="btn" href="/logout">Logout</a>
+  </div>
+</body>
+</html>
