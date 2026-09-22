@@ -1,0 +1,6 @@
+{
+  "name": "vivek_package",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "A useful utility package for Node.js practical assignment"
+}

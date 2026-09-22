@@ -1,0 +1,6 @@
+{
+  "name": "04-create-zip",
+  "version": "1.0.0",
+  "scripts": {"start": "node app.js"},
+  "dependencies": {"archiver": "^7.0.1"}
+}

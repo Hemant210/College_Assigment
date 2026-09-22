@@ -1,0 +1,314 @@
+Q1. Vehicle Class
+class Vehicle:
+    def __init__(self, max_speed, mileage):
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+
+v1 = Vehicle(180, 20)
+v2 = Vehicle(160, 18)
+v3 = Vehicle(200, 15)
+v4 = Vehicle(140, 25)
+v5 = Vehicle(220, 12)
+
+print(v1.max_speed, v1.mileage)
+print(v2.max_speed, v2.mileage)
+print(v3.max_speed, v3.mileage)
+print(v4.max_speed, v4.mileage)
+print(v5.max_speed, v5.mileage)
+Q2. Bus Inherits Vehicle + Setter and Getter
+class Vehicle:
+    def __init__(self, max_speed, mileage):
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+
+class Bus(Vehicle):
+    def set_speed(self, speed):
+        self.max_speed = speed
+
+    def get_speed(self):
+        return self.max_speed
+
+    def set_mileage(self, mileage):
+        self.mileage = mileage
+
+    def get_mileage(self):
+        return self.mileage
+
+
+bus = Bus(120, 15)
+
+bus.set_speed(150)
+bus.set_mileage(20)
+
+print("Speed:", bus.get_speed())
+print("Mileage:", bus.get_mileage())
+Q3. Bus Seating Capacity
+class Vehicle:
+    def __init__(self, max_speed, mileage):
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+
+class Bus(Vehicle):
+    def __init__(self, max_speed, mileage):
+        super().__init__(max_speed, mileage)
+
+    def seating_capacity(self, capacity=50):
+        print("Seating Capacity:", capacity)
+
+
+bus = Bus(100, 15)
+
+bus.seating_capacity()
+bus.seating_capacity(60)
+Q4. Determine the Class of Bus Object
+class Vehicle:
+    pass
+
+
+class Bus(Vehicle):
+    pass
+
+
+bus = Bus()
+
+print(type(bus))
+print(isinstance(bus, Bus))
+print(isinstance(bus, Vehicle))
+Output:
+
+<class '__main__.Bus'>
+True
+True
+Q5. Diamond Problem
+class A:
+    def show(self):
+        print("Class A")
+
+
+class B(A):
+    def show(self):
+        print("Class B")
+
+
+class C(A):
+    def show(self):
+        print("Class C")
+
+
+class D(B, C):
+    pass
+
+
+obj = D()
+obj.show()
+
+print(D.mro())
+Python uses MRO (Method Resolution Order) to solve the diamond problem. Here, B is checked before C.
+
+Q6. Multilevel Inheritance
+class Grandfather:
+    def show_grandfather(self):
+        print("I am Grandfather")
+
+
+class Father(Grandfather):
+    def show_father(self):
+        print("I am Father")
+
+
+class Son(Father):
+    def show_son(self):
+        print("I am Son")
+
+
+obj = Son()
+
+obj.show_grandfather()
+obj.show_father()
+obj.show_son()
+Q7. Encapsulation and Inheritance — Bank Account
+class Account:
+    def __init__(self, name, balance):
+        self.name = name
+        self.__balance = balance   # Encapsulation
+
+    def deposit(self, amount):
+        self.__balance += amount
+        print("Deposited:", amount)
+
+    def credit(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+            print("Credited:", amount)
+        else:
+            print("Insufficient balance")
+
+    def get_balance(self):
+        return self.__balance
+
+
+class SavingsAccount(Account):
+    def interest(self):
+        print("Savings account interest is 5%")
+
+
+class CurrentAccount(Account):
+    def interest(self):
+        print("Current account interest is 2%")
+
+
+class Bank:
+    def create_account(self, account):
+        print("Account created for", account.name)
+
+    def delete_account(self, account):
+        print("Account deleted for", account.name)
+
+
+# Create account
+account = SavingsAccount("Rahul", 5000)
+
+bank = Bank()
+bank.create_account(account)
+
+account.deposit(2000)
+account.credit(1000)
+
+print("Balance:", account.get_balance())
+
+account.interest()
+
+bank.delete_account(account)
+Here:
+
+__balance demonstrates encapsulation.
+
+SavingsAccount and CurrentAccount demonstrate inheritance.
+
+deposit() and credit() are account functions.
+
+Bank handles creating and deleting accounts.
+
+Q8. Multiple Inheritance, MRO and C3
+class Account:
+    def apply_interest(self):
+        print("Account interest")
+
+
+class LoyaltyAccount(Account):
+    def apply_interest(self):
+        print("Loyalty interest")
+        super().apply_interest()
+
+
+class FeeAccount(Account):
+    def apply_interest(self):
+        print("Fee account interest")
+        super().apply_interest()
+
+
+class PremiumAccount(LoyaltyAccount, FeeAccount):
+    pass
+
+
+account = PremiumAccount()
+
+account.apply_interest()
+
+print(PremiumAccount.mro())
+The MRO is approximately:
+
+PremiumAccount
+LoyaltyAccount
+FeeAccount
+Account
+object
+So Python follows this order when finding apply_interest().
+
+Q9. Q8 Using Abstract Class
+from abc import ABC, abstractmethod
+
+
+class Account(ABC):
+
+    @abstractmethod
+    def apply_interest(self):
+        pass
+
+
+class LoyaltyAccount(Account):
+    def apply_interest(self):
+        print("Loyalty interest")
+        super().apply_interest()
+
+
+class FeeAccount(Account):
+    def apply_interest(self):
+        print("Fee account interest")
+        super().apply_interest()
+
+
+class PremiumAccount(LoyaltyAccount, FeeAccount):
+    def apply_interest(self):
+        print("Premium account interest")
+        super().apply_interest()
+
+
+account = PremiumAccount()
+account.apply_interest()
+
+print(PremiumAccount.mro())
+ABC makes Account an abstract class, and @abstractmethod defines a method that child classes must implement.
+
+Q10. Interface Using Q9
+Python does not have a separate interface keyword like Java. We can create an interface-like structure using Abstract Base Classes.
+
+from abc import ABC, abstractmethod
+
+
+class Account(ABC):
+
+    @abstractmethod
+    def interestRate(self):
+        pass
+
+    @abstractmethod
+    def apply_interest(self):
+        pass
+
+
+class LoyaltyAccount(Account):
+
+    def interestRate(self):
+        return 5
+
+    def apply_interest(self):
+        print("Loyalty interest")
+
+
+class FeeAccount(Account):
+
+    def interestRate(self):
+        return 2
+
+    def apply_interest(self):
+        print("Fee account interest")
+
+
+class PremiumAccount(LoyaltyAccount, FeeAccount):
+
+    def interestRate(self):
+        return 7
+
+    def apply_interest(self):
+        print("Premium interest")
+
+
+account = PremiumAccount()
+
+print("Interest Rate:", account.interestRate(), "%")
+account.apply_interest()
+

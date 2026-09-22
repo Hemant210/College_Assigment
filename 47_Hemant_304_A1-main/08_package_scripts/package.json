@@ -1,0 +1,11 @@
+{
+  "name": "08-package-scripts",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "node server.js",
+    "test": "node test.js",
+    "hello": "node hello.js",
+    "date": "node date.js",
+    "info": "node info.js"
+  }
+}
