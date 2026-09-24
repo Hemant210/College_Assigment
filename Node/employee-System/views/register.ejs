@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+
+<body>
+
+<h2>Employee Registration</h2>
+
+<% if (error) { %>
+    <p><%= error %></p>
+<% } %>
+
+<form method="POST" action="/register">
+    Name:
+    <input type="text" name="name" required>
+    <br><br>
+
+    Email:
+    <input type="email" name="email" required>
+    <br><br>
+
+    Password:
+    <input type="password" name="password" required>
+    <br><br>
+
+    Department:
+    <select name="department">
+        <option value="HR">HR</option>
+        <option value="IT">IT</option>
+        <option value="Finance">Finance</option>
+        <option value="Sales">Sales</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+<a href="/login">Login</a>
+
+</body>
+</html>
