@@ -1,0 +1,22 @@
+<h2>Welcome <%= owner.name %></h2>
+
+<p>Email: <%= owner.email %></p>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+
+    <% products.forEach(p => { %>
+<tr>
+        <th><%= p.name %></th>
+        <th><%= p.price %></th>
+        <th><%= p.quantity%></th>
+    </tr>
+
+
+    <% }) %>
+</table>
+<a href="/logout">Logout</a>
