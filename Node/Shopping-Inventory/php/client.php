@@ -45,6 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 // 3. GET
+// API response
+//      ↓
+// json_decode()
+//      ↓
+// $data['data']
 $ch = curl_init($api);
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

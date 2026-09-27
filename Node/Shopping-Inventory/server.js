@@ -8,106 +8,94 @@ const Product = require('./models/Product');
 
 const app = express();
 
-//Connection
-mongoose.connect('mongodb://localhost:27017/inventorydb')
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.error("Mongo error : ", err));
 
-//Middleware + Session
+// Database
+mongoose.connect('mongodb://127.0.0.1:27017/inventorydb');
+
+
+// Middleware
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(session({
-    secret:'owner_secret_key',
+    secret: 'secret',
     resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge : 1000*60*60}
+    saveUninitialized: false
 }));
 
-//Login protection
-function isloggoedIn(req, res, next){
-    if(req.session.owner) return next();
-    res.redirect('/login');
+
+// Login Protection
+function isLoggedIn(req, res, next) {
+
+    if (req.session.owner)
+        next();
+    else
+        res.redirect('/login');
 }
 
-//Home + Register
+
+// Home
 app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
+
+// Register
 app.get('/register', (req, res) => {
-    res.render('register', {error: null});
+    res.render('register');
 });
 
-//Registration POST
-// req.body
-//    ↓
-// validate
-//    ↓
-// find existing email
-//    ↓
-// bcrypt.hash()
-//    ↓
-// Owner.create()
-//    ↓
-// redirect login
 app.post('/register', async (req, res) => {
+
     const { name, email, password } = req.body;
 
     const exists = await Owner.findOne({ email });
 
-    if(exists)
-        return res.send("Email Already Exists");
+    if (exists)
+        return res.send('Email Already Exists');
 
     const hash = await bcrypt.hash(password, 10);
 
     await Owner.create({
-        name, email, password: hash
+        name,
+        email,
+        password: hash
     });
 
-        res.redirect('/login');
+    res.redirect('/login');
 });
 
-//Login
-// findOne()
-//  ↓
-// bcrypt.compare()
-//  ↓
-// req.session.owner
-//  ↓
-// /dashboard
+
+// Login
 app.get('/login', (req, res) => {
-    res.render('login', {
-        error: null,
-        success: null
-    });
+    res.render('login');
 });
-
 
 app.post('/login', async (req, res) => {
+
     const { email, password } = req.body;
 
-    const own = await Owner.findOne({ email });
+    const owner = await Owner.findOne({ email });
 
-    if(!own)
-        return res.send("Invalid Login");
+    if (!owner)
+        return res.send('Invalid Login');
 
-    const ok = await bcrypt.compare(
-        password,
-        own.password
-    );
+    const ok = await bcrypt.compare(password, owner.password);
 
-    if(!ok)
-        return res.send("Invalid Login");
+    if (!ok)
+        return res.send('Invalid Login');
 
-    req.session.owner = own;
+    req.session.owner = owner;
 
     res.redirect('/dashboard');
 });
 
-app.get('/dashboard', isloggoedIn, async (req, res) => {
+
+// Dashboard
+app.get('/dashboard', isLoggedIn, async (req, res) => {
+
     const products = await Product.find();
 
     res.render('dashboard', {
@@ -116,17 +104,26 @@ app.get('/dashboard', isloggoedIn, async (req, res) => {
     });
 });
 
+
+// Logout
 app.get('/logout', (req, res) => {
+
     req.session.destroy(() => {
         res.redirect('/login');
     });
+
 });
 
+
+// POST API
 app.post('/api/products', async (req, res) => {
+
     const { name, price, quantity } = req.body;
 
     const product = await Product.create({
-        name, price, quantity
+        name,
+        price,
+        quantity
     });
 
     res.json({
@@ -136,8 +133,10 @@ app.post('/api/products', async (req, res) => {
 });
 
 
+// GET API
 app.get('/api/products', async (req, res) => {
-   const products = await Product.find();
+
+    const products = await Product.find();
 
     res.json({
         success: true,
@@ -145,9 +144,8 @@ app.get('/api/products', async (req, res) => {
     });
 });
 
+
+// Start Server
 app.listen(3000, () => {
-
-    console.log("Server running at http://localhost:3000");
-
+    console.log('Server running');
 });
-
