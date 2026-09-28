@@ -79,11 +79,11 @@ app.get("/dashboard", isLoggedIn, async (req, res) => {
   const doctors = await Doctor.find();
 
   res.render("dashboard", {
-    doctor: req.session.doctor,
+    doctor: reFq.session.doctor,
     doctors,
   });
 });
-
+x
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/login");

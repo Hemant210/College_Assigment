@@ -140,7 +140,7 @@ app.post("/api/members", async (req, res) => {
 
   if (exists) {
     return res.json("register", {
-              success: false,
+    success: false,
 
       message: "Email Already register"
     });
