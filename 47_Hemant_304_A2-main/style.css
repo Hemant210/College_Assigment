@@ -1,0 +1,1020 @@
+/* ==========================================================================
+   Philips India - Product Detail Page Clone Stylesheet
+   Matches exact layout, colors, typography and design tokens from screenshot
+   ========================================================================== */
+
+:root {
+  --philips-navy: #002244;
+  --philips-blue: #0066a1;
+  --philips-blue-hover: #004d7a;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  --success-green: #15803d;
+  --success-emerald: #16a34a;
+  --card-bg-subtle: #f3f6fa;
+  --border-light: #e5e7eb;
+  --border-card: #e9ecef;
+  --whatsapp-green: #25d366;
+  --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background-color: #ffffff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Top Announcement Bar
+   -------------------------------------------------------------------------- */
+.top-announcement-bar {
+  background-color: var(--philips-navy);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  padding: 6px 16px;
+  letter-spacing: 0.2px;
+}
+
+.top-announcement-bar a {
+  color: #ffffff;
+  transition: opacity 0.2s ease;
+}
+
+.top-announcement-bar a:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   2. Main Header & Navigation
+   -------------------------------------------------------------------------- */
+.main-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ebebeb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.brand-logo svg {
+  height: 24px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover, .nav-item a:hover {
+  color: var(--philips-blue);
+}
+
+.nav-item.has-dropdown {
+  cursor: pointer;
+}
+
+.chevron-down {
+  transition: transform 0.2s ease;
+}
+
+.nav-item.has-dropdown:hover .chevron-down {
+  transform: translateY(1px);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Pill Search Bar */
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f6;
+  border-radius: 9999px;
+  padding: 0 16px;
+  width: 250px;
+  height: 38px;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, width 0.3s ease;
+}
+
+.search-form:focus-within {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px var(--philips-blue);
+  width: 280px;
+}
+
+.search-icon {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: #111827;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Right Action Utilities */
+.user-utilities {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.reward-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bolt-icon {
+  position: absolute;
+  top: -4px;
+  left: -6px;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+}
+
+.cart-btn {
+  position: relative;
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  background-color: transparent;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   3. PDP Main Content Grid
+   -------------------------------------------------------------------------- */
+.product-page-main {
+  padding: 24px 0 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.pdp-wrapper {
+  display: grid;
+  grid-template-columns: minmax(360px, 480px) minmax(420px, 1fr);
+  gap: 48px;
+  padding: 0 24px;
+  align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   4. Gallery Column (Left)
+   -------------------------------------------------------------------------- */
+.gallery-column {
+  position: sticky;
+  top: 84px;
+}
+
+.main-image-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  aspect-ratio: 1 / 1;
+}
+
+.hero-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-image-card:hover .hero-product-image {
+  transform: scale(1.02);
+}
+
+/* Thumbnails */
+.thumbnails-slider {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.thumb-btn {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  padding: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumb-btn:hover {
+  border-color: #9ca3af;
+}
+
+.thumb-btn.active {
+  border-color: var(--philips-blue);
+  box-shadow: 0 0 0 1px var(--philips-blue);
+}
+
+/* --------------------------------------------------------------------------
+   5. Details Column (Right)
+   -------------------------------------------------------------------------- */
+.details-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 27px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.product-tagline {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+/* Rating block */
+.rating-review-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13.5px;
+}
+
+.stars {
+  color: #111827;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+.rating-score {
+  font-weight: 700;
+  color: #111827;
+}
+
+.review-platforms {
+  color: var(--text-muted);
+}
+
+/* Trending Badge */
+.trending-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--philips-blue);
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.trending-arrow {
+  stroke: var(--philips-blue);
+}
+
+/* Pricing Section */
+.price-section {
+  margin-bottom: 16px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.5px;
+}
+
+.mrp-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.strikethrough-pipe {
+  position: absolute;
+  left: -4px;
+  top: 3px;
+  bottom: 3px;
+  width: 4px;
+  background-color: var(--philips-blue);
+  border-radius: 2px;
+}
+
+.original-mrp {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+.savings-pill {
+  color: var(--success-emerald);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.tax-disclaimer {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* EMI & Pay Later Promo */
+.emi-promo-card {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.emi-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.new-tag-wrapper {
+  padding-top: 2px;
+}
+
+.new-tag {
+  background-color: #dcfce7;
+  color: var(--success-green);
+  border: 1px solid #86efac;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+.emi-plan-headline {
+  font-size: 13.5px;
+  color: #1f2937;
+  line-height: 1.35;
+}
+
+.highlight-cost {
+  color: var(--success-green);
+  font-weight: 700;
+}
+
+.emi-partners {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.upi-badge {
+  font-weight: 700;
+  color: #2563eb;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.snapmint-logo {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.2px;
+}
+
+.snap-part {
+  color: #0f172a;
+}
+
+.mint-part {
+  color: #ea580c;
+}
+
+.view-plans-button {
+  background-color: var(--philips-blue);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.view-plans-button:hover {
+  background-color: var(--philips-blue-hover);
+}
+
+/* Key Highlights Box */
+.key-highlights-container {
+  margin-bottom: 24px;
+}
+
+.highlights-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.highlights-card {
+  background-color: var(--card-bg-subtle);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.highlights-lead {
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.you-will-like-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.check-icon-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--success-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.you-will-like-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.highlights-bullet-list {
+  list-style-type: disc;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.highlights-bullet-list li {
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+/* Special Offers Container */
+.special-offers-container {
+  margin-bottom: 24px;
+}
+
+.offers-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.offers-heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0066a1;
+}
+
+.powered-by-gokwik {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.gokwik-img {
+  height: 14px;
+  width: auto;
+  object-fit: contain;
+}
+
+.gokwik-text {
+  font-weight: 700;
+  color: #002244;
+}
+
+.coupon-offer-box {
+  background-color: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.coupon-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #1f2937;
+}
+
+.coupon-badge-pill {
+  background-color: #0066a1;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.apply-coupon-btn {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0066a1;
+  padding: 4px 10px;
+  border: 1px solid #0066a1;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.apply-coupon-btn:hover {
+  background-color: #0066a1;
+  color: #ffffff;
+}
+
+/* Purchase Actions Row */
+.purchase-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.quantity-picker {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  height: 44px;
+  background-color: #ffffff;
+}
+
+.qty-btn {
+  width: 38px;
+  height: 100%;
+  font-size: 18px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.qty-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.qty-display {
+  width: 36px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.btn {
+  height: 44px;
+  padding: 0 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--philips-blue);
+  color: #ffffff;
+  flex: 1;
+}
+
+.btn-primary:hover {
+  background-color: var(--philips-blue-hover);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--philips-blue);
+  color: var(--philips-blue);
+  background-color: #ffffff;
+  flex: 1;
+}
+
+.btn-outline:hover {
+  background-color: #f0f7fc;
+}
+
+/* Delivery Pincode Card */
+.delivery-pincode-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background-color: #fafbfc;
+}
+
+.pincode-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.pincode-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pincode-input-row input {
+  flex: 1;
+  height: 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 13px;
+  outline: none;
+}
+
+.pincode-input-row input:focus {
+  border-color: var(--philips-blue);
+}
+
+.btn-check {
+  background-color: #ffffff;
+  border: 1px solid var(--philips-blue);
+  color: var(--philips-blue);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 0 16px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-check:hover {
+  background-color: var(--philips-blue);
+  color: #ffffff;
+}
+
+.delivery-msg {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.delivery-msg.success {
+  color: var(--success-green);
+  font-weight: 500;
+}
+
+.delivery-msg.error {
+  color: #dc2626;
+}
+
+/* --------------------------------------------------------------------------
+   6. WhatsApp Floating Action Button
+   -------------------------------------------------------------------------- */
+.whatsapp-floating-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--whatsapp-green);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.whatsapp-floating-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   7. Interactive Dialog Modal (EMI Plans)
+   -------------------------------------------------------------------------- */
+.emi-modal-box {
+  margin: auto;
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+}
+
+.emi-modal-box::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.close-modal-btn {
+  font-size: 24px;
+  color: #6b7280;
+  padding: 4px;
+  line-height: 1;
+}
+
+.close-modal-btn:hover {
+  color: #111827;
+}
+
+.modal-subtitle {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.emi-plan-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.emi-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.emi-row.highlight {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  position: relative;
+}
+
+.best-badge {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.emi-row .sub {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.emi-row .price-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Toast Notice */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   8. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .pdp-wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .gallery-column {
+    position: static;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .header-container {
+    padding: 0 16px;
+  }
+
+  .search-form {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .product-title {
+    font-size: 22px;
+  }
+
+  .current-price {
+    font-size: 26px;
+  }
+
+  .search-form {
+    display: none;
+  }
+
+  .purchase-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quantity-picker {
+    justify-content: center;
+  }
+}
